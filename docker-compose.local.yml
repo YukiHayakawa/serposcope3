@@ -1,0 +1,17 @@
+version: '3'
+services:
+  serposcope:
+    build:
+      context: ./
+      dockerfile: ./serposcope/Dockerfile
+      args:
+        UBUNTU_DOCKER_IMAGE: ${UBUNTU_DOCKER_IMAGE}
+        SERPOSCOPE_VERSION: ${SERPOSCOPE_VERSION}
+        CPU_MODEL: ${CPU_MODEL}
+        APP_USER: ${APP_USER}
+        APP_GROUP: ${APP_GROUP}
+    container_name: ${WEB_SERVICE_HOST}
+    ports:
+      - '${WEB_SERVICE_PORT}:${WEB_SERVICE_PORT}'
+    command: sh -c '/entrypoint.sh'
+    restart: always
